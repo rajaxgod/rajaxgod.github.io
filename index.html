@@ -3,78 +3,482 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ayush — Creative Developer</title>
-  <meta name="description" content="Portfolio of Ayush — creative developer building Kriti, a lore architect and writing workspace." />
+  <title>Goswami Ayush Raja — Creative Developer</title>
+  <meta name="description" content="Portfolio of Goswami Ayush Raja — creative developer, digital architect, and Grade 10 student from Bihar, India. Building Kriti, a lore-architect writing workspace." />
 
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,300;1,600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ============================================
+       PREMIUM PROFILE LANDING — Clean & Responsive
+       ============================================ */
+    :root {
+      --bg-deep: #060b14;
+      --bg-surface: #0a0f19;
+      --glass: rgba(255, 255, 255, 0.035);
+      --glass-border: rgba(255, 255, 255, 0.06);
+      --glass-border-strong: rgba(255, 255, 255, 0.14);
+      --text-primary: #f4f6fb;
+      --text-secondary: #9aa3b2;
+      --text-muted: #5a6678;
+      --accent: #c7adff;
+      --accent-soft: rgba(199, 173, 255, 0.1);
+      --accent-glow: rgba(199, 173, 255, 0.35);
+      --font-serif: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+      --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+      --radius-card: 28px;
+      --radius-sm: 14px;
+      --shadow-card: 0 32px 80px rgba(0, 0, 0, 0.45), 0 0 0 1px var(--glass-border);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--bg-deep);
+      color: var(--text-primary);
+      min-height: 100vh;
+      height: 100vh;
+      overflow: hidden; /* No scroll — one page viewport */
+      line-height: 1.6;
+      position: relative;
+    }
+
+    /* ============================================
+       ACCESSIBILITY
+       ============================================ */
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: var(--text-primary);
+      color: var(--bg-deep);
+      padding: 8px 16px;
+      z-index: 100;
+      text-decoration: none;
+      font-weight: 500;
+      border-radius: 0 0 8px 0;
+      transition: top 0.2s ease;
+    }
+    .skip-link:focus { top: 0; outline: 2px solid var(--accent); outline-offset: -2px; }
+
+    /* ============================================
+       BACKGROUND BLOBS
+       ============================================ */
+    .blob {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(100px);
+      opacity: 0.35;
+      pointer-events: none;
+      z-index: 0;
+      animation: floatBlob 20s ease-in-out infinite alternate;
+    }
+    .blob-1 {
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, #8b6eff 0%, transparent 70%);
+      top: -12%; left: -12%;
+      animation-delay: 0s;
+    }
+    .blob-2 {
+      width: 450px; height: 450px;
+      background: radial-gradient(circle, #c7adff 0%, transparent 70%);
+      bottom: -15%; right: -10%;
+      animation-delay: -7s;
+    }
+    .blob-3 {
+      width: 350px; height: 350px;
+      background: radial-gradient(circle, #6b8cff 0%, transparent 70%);
+      top: 40%; left: 55%;
+      animation-delay: -14s;
+    }
+
+    @keyframes floatBlob {
+      0% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(30px, -20px) scale(1.06); }
+      66% { transform: translate(-15px, 15px) scale(0.96); }
+      100% { transform: translate(20px, 10px) scale(1.03); }
+    }
+
+    /* ============================================
+       LAYOUT
+       ============================================ */
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 760px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ============================================
+       PROFILE CARD
+       ============================================ */
+    .profile-card {
+      width: 100%;
+      max-width: 640px;
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-card);
+      backdrop-filter: blur(28px) saturate(1.2);
+      -webkit-backdrop-filter: blur(28px) saturate(1.2);
+      box-shadow: var(--shadow-card);
+      padding: 56px 48px 52px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      animation: cardRise 1s cubic-bezier(0.22, 1, 0.36, 1) 0.05s both;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .profile-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 15%; right: 15%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      opacity: 0.45;
+    }
+
+    @keyframes cardRise {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ============================================
+       AVATAR
+       ============================================ */
+    .avatar-wrapper {
+      position: relative;
+      display: inline-block;
+      margin-bottom: 26px;
+      animation: avatarFade 1s ease-out 0.25s both;
+    }
+
+    @keyframes avatarFade {
+      from { opacity: 0; transform: scale(0.92); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+
+    .avatar {
+      width: 150px; height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--glass-border-strong);
+      box-shadow: 0 0 35px var(--accent-glow), 0 8px 30px rgba(0,0,0,0.35);
+      transition: transform 0.45s ease, box-shadow 0.45s ease;
+      display: block;
+    }
+
+    .profile-card:hover .avatar {
+      transform: scale(1.04) rotate(-1deg);
+      box-shadow: 0 0 55px var(--accent-glow), 0 14px 40px rgba(0,0,0,0.45);
+    }
+
+    .avatar-ring {
+      position: absolute;
+      inset: -7px;
+      border-radius: 50%;
+      border: 1.5px solid transparent;
+      background: linear-gradient(135deg, var(--accent), #a78bfa, #60a5fa) border-box;
+      -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      opacity: 0.7;
+      animation: ringPulse 4s ease-in-out infinite;
+    }
+
+    @keyframes ringPulse {
+      0%, 100% { opacity: 0.45; transform: scale(1); }
+      50% { opacity: 0.85; transform: scale(1.02); }
+    }
+
+    /* ============================================
+       TYPOGRAPHY
+       ============================================ */
+    .name {
+      font-family: var(--font-serif);
+      font-size: clamp(2.6rem, 6vw, 3.8rem);
+      font-weight: 600;
+      letter-spacing: -0.035em;
+      line-height: 1.05;
+      margin-bottom: 6px;
+      background: linear-gradient(135deg, #fff 10%, #c7adff 90%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: textSlide 0.9s ease-out 0.35s both;
+    }
+
+    .tagline {
+      font-family: var(--font-sans);
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      font-weight: 300;
+      letter-spacing: 0.02em;
+      margin-bottom: 16px;
+      animation: textSlide 0.9s ease-out 0.45s both;
+    }
+
+    .bio {
+      color: var(--text-secondary);
+      font-size: 0.92rem;
+      max-width: 460px;
+      margin: 0 auto 28px;
+      line-height: 1.65;
+      animation: textSlide 0.9s ease-out 0.55s both;
+    }
+
+    .section-heading {
+      font-family: var(--font-sans);
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--text-muted);
+      margin: 4px 0 16px;
+      animation: textSlide 0.9s ease-out 0.7s both;
+    }
+
+    @keyframes textSlide {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ============================================
+       SOCIAL NAVIGATION
+       ============================================ */
+    .social-nav {
+      display: inline-flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 28px;
+      animation: textSlide 0.9s ease-out 0.85s both;
+    }
+
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 46px; height: 46px;
+      border-radius: 50%;
+      color: var(--text-secondary);
+      border: 1px solid var(--glass-border);
+      background: rgba(255,255,255,0.02);
+      transition: all 0.25s ease;
+      text-decoration: none;
+    }
+
+    .social-link:hover,
+    .social-link:focus-visible {
+      color: var(--accent);
+      border-color: var(--accent-soft);
+      background: var(--accent-soft);
+      transform: translateY(-3px) scale(1.08);
+      box-shadow: 0 8px 20px var(--accent-glow);
+      outline: none;
+    }
+
+    /* ============================================
+       PROJECTS LIST
+       ============================================ */
+    .project-list {
+      list-style: none;
+      text-align: left;
+      width: 100%;
+      animation: textSlide 0.9s ease-out 1s both;
+    }
+
+    .project-list li { margin-bottom: 10px; }
+
+    .project-link {
+      display: block;
+      padding: 16px 20px;
+      border-radius: var(--radius-sm);
+      border: 1px solid transparent;
+      background: rgba(255,255,255,0.015);
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.25s ease;
+    }
+
+    .project-link:hover,
+    .project-link:focus-visible {
+      border-color: var(--glass-border-strong);
+      background: rgba(255,255,255,0.055);
+      transform: translateX(4px);
+      outline: none;
+    }
+
+    .project-link:hover .project-title,
+    .project-link:focus-visible .project-title {
+      color: var(--accent);
+    }
+
+    .project-title {
+      font-family: var(--font-serif);
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+      transition: color 0.2s ease;
+    }
+
+    .project-desc {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* ============================================
+       FOOTER
+       ============================================ */
+    .site-footer {
+      position: fixed;
+      bottom: 16px;
+      left: 0;
+      width: 100%;
+      text-align: center;
+      z-index: 2;
+      pointer-events: none;
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      letter-spacing: 0.04em;
+      animation: textSlide 1s ease-out 1.2s both;
+    }
+
+    .site-footer p { pointer-events: auto; }
+
+    /* ============================================
+       RESPONSIVE (Fit without scroll)
+       ============================================ */
+    @media (max-width: 640px) {
+      .profile-card { padding: 36px 24px 32px; }
+      .avatar { width: 120px; height: 120px; }
+      .bio { font-size: 0.85rem; margin-bottom: 22px; }
+      .social-link { width: 42px; height: 42px; }
+      .project-desc { font-size: 0.8rem; }
+    }
+
+    @media (max-width: 400px) {
+      .profile-card { padding: 28px 20px 28px; }
+      .tagline { font-size: 0.95rem; }
+    }
+  </style>
 </head>
 <body>
   <a href="#main-content" class="skip-link">Skip to content</a>
 
-  <div class="grain" aria-hidden="true"></div>
+  <!-- Animated background blobs -->
+  <div class="blob blob-1" aria-hidden="true"></div>
+  <div class="blob blob-2" aria-hidden="true"></div>
+  <div class="blob blob-3" aria-hidden="true"></div>
 
-  <main id="main-content" class="stage">
-    <article class="plate" aria-label="Profile">
+  <main id="main-content" class="container">
+    <article class="profile-card" aria-label="Personal profile">
+      <figure class="avatar-wrapper">
+        <img src="profile/profilepic.jpg" alt="Portrait of Ayush R." width="240" height="240" loading="eager" class="avatar" />
+        <span class="avatar-ring" aria-hidden="true"></span>
+      </figure>
 
-      <div class="plate-top">
-        <figure class="avatar-wrap">
-          <img
-            src="profile/profilepic.jpg"
-            alt="Portrait of Ayush"
-            width="200"
-            height="200"
-            loading="eager"
-            class="avatar"
-          />
-        </figure>
-
-        <div class="identity">
-          <p class="eyebrow">Grade 10 · Bihar, India</p>
-          <h1 class="name"><span class="drop">A</span>yush</h1>
-          <p class="tagline">Creative Developer &amp; Digital Architect</p>
-        </div>
-      </div>
-
+      <h1 class="name">Ayush</h1>
+      <p class="tagline">Creative Developer & Digital Architect</p>
       <p class="bio">
-        Jack of all trades, currently building <strong>Kriti</strong> — a lore
-        architect and writing workspace for serious fiction writers.
+        Grade 10, Bihar, India. Jack of all trades — currently building Kriti (a lore-architect writing workspace) and workspace systems for focused creators.
       </p>
-
-      <div class="rule" aria-hidden="true"></div>
-
-      <section class="work" aria-label="Selected work">
-        <a href="#" class="project">
-          <div class="project-head">
-            <h2 class="project-title">Kriti</h2>
-            <span class="project-tag">Lore Architect · Writing Workspace</span>
-          </div>
-          <p class="project-desc">
-            A single-screen workspace that fuses manuscript, codex, and AI
-            assistant into one triptych — no broken tabs, no lost context.
-          </p>
-        </a>
-      </section>
 
       <nav class="social-nav" aria-label="Social links">
         <a href="https://github.com/rajaxgod" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="social-link">
-          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="currentColor"><path d="M12 .5C5.37 .5 0 5.78 0 12.26c0 5.18 3.36 9.58 8.02 11.13.59.11.8-.26.8-.57v-2.03c-3.27.71-3.96-1.58-3.96-1.58-.54-1.36-1.31-1.72-1.31-1.72-1.07-.73.08-.72.08-.72 1.18.08 1.81 1.21 1.81 1.21 1.05 1.8 2.75 1.28 3.42.98.11-.76.41-1.28.75-1.58-2.66-.3-5.46-1.33-5.46-5.93 0-1.31.47-2.38 1.24-3.22-.12-.3-.54-1.52.11-3.17 0 0 1.01-.32 3.3 1.23.95-.26 1.98-.4 3-.4s2.05.14 3 .4c2.28-1.55 3.29-1.23 3.29-1.23.65 1.65.24 2.87.12 3.17.77.84 1.24 1.91 1.24 3.22 0 4.61-2.8 5.63-5.48 5.92.43.37.82 1.1.82 2.22v3.29c0 .32.21.7.82.58C20.64 21.84 24 17.45 24 12.26 24 5.78 18.63.5 12 .5Z"/></svg>
+          <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="currentColor"><path d="M12 .5C5.37 .5 0 5.78 0 12.26c0 5.18 3.36 9.58 8.02 11.13.59.11.8-.26.8-.57v-2.03c-3.27.71-3.96-1.58-3.96-1.58-.54-1.36-1.31-1.72-1.31-1.72-1.07-.73.08-.72.08-.72 1.18.08 1.81 1.21 1.81 1.21 1.05 1.8 2.75 1.28 3.42.98.11-.76.41-1.28.75-1.58-2.66-.3-5.46-1.33-5.46-5.93 0-1.31.47-2.38 1.24-3.22-.12-.3-.54-1.52.11-3.17 0 0 1.01-.32 3.3 1.23.95-.26 1.98-.4 3-.4s2.05.14 3 .4c2.28-1.55 3.29-1.23 3.29-1.23.65 1.65.24 2.87.12 3.17.77.84 1.24 1.91 1.24 3.22 0 4.61-2.8 5.63-5.48 5.92.43.37.82 1.1.82 2.22v3.29c0 .32.21.7.82.58C20.64 21.84 24 17.45 24 12.26 24 5.78 18.63.5 12 .5Z"/></svg>
         </a>
         <a href="https://www.linkedin.com/in/trinetra-ayush/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="social-link">
-          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="currentColor"><path d="M20.45 2H3.55A1.55 1.55 0 002 3.55v16.9A1.55 1.55 0 003.55 22h16.9A1.55 1.55 0 0022 20.45V3.55A1.55 1.55 0 0020.45 2ZM7.85 18.3H5.2V9.15h2.65v9.15ZM6.52 8.05a1.54 1.54 0 110-3.07 1.54 1.54 0 010 3.07ZM18.8 18.3h-2.64v-4.46c0-1.06 0-2.43-1.48-2.43-1.48 0-1.7 1.16-1.7 2.36v4.53H10.34V9.15h2.54v1.25h.04c.35-.67 1.2-1.37 2.47-1.37 2.65 0 3.14 1.75 3.14 4.02v5.25Z"/></svg>
+          <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="currentColor"><path d="M20.45 2H3.55A1.55 1.55 0 002 3.55v16.9A1.55 1.55 0 003.55 22h16.9A1.55 1.55 0 0022 20.45V3.55A1.55 1.55 0 0020.45 2ZM7.85 18.3H5.2V9.15h2.65v9.15ZM6.52 8.05a1.54 1.54 0 110-3.07 1.54 1.54 0 010 3.07ZM18.8 18.3h-2.64v-4.46c0-1.06 0-2.43-1.48-2.43-1.48 0-1.7 1.16-1.7 2.36v4.53H10.34V9.15h2.54v1.25h.04c.35-.67 1.2-1.37 2.47-1.37 2.65 0 3.14 1.75 3.14 4.02v5.25Z"/></svg>
         </a>
         <a href="mailto:rajagames@zohomail.in" aria-label="Email" class="social-link">
-          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2" ry="2"/><polyline points="2 7 12 13 22 7"/></svg>
+          <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2" ry="2"/><polyline points="2 7 12 13 22 7"/></svg>
         </a>
       </nav>
 
-      <p class="colophon">© <span id="year"></span> राधे-राधे 💖</p>
+      <section aria-label="Selected projects">
+        <h2 class="section-heading">Selected Projects</h2>
+        <ul class="project-list">
+          <li>
+            <a href="#" class="project-link">
+              <span class="project-title">Kriti — Lore Architect & Writing Workspace</span>
+              <span class="project-desc">A triptych interface that fuses manuscript, Codex, and World Catalog into one uninterrupted creative surface.</span>
+            </a>
+          </li>
+        </ul>
+      </section>
     </article>
   </main>
 
-  <script src="script.js"></script>
+  <footer class="site-footer">
+    <p>© <span id="year"></span> राधे-राधे 💖 Goswami Ayush Raja</p>
+  </footer>
+
+  <script>
+    (function() {
+      'use strict';
+
+      /* 1. Dynamic year */
+      const yearEl = document.getElementById('year');
+      if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+      /* 2. Subtle mouse-parallax on blobs */
+      const blobs = document.querySelectorAll('.blob');
+      if (!blobs.length || !window.matchMedia('(hover: hover)').matches) return;
+
+      let mouseX = 0, mouseY = 0, targetX = 0, targetY = 0, tick = 0, active = true;
+
+      document.addEventListener('mousemove', (e) => {
+        const cx = window.innerWidth / 2;
+        const cy = window.innerHeight / 2;
+        mouseX = (e.clientX - cx) / cx;
+        mouseY = (e.clientY - cy) / cy;
+        active = true;
+      }, { passive: true });
+
+      function loop() {
+        tick++;
+        if (tick % 2 === 0) {
+          targetX += (mouseX - targetX) * 0.06;
+          targetY += (mouseY - targetY) * 0.06;
+          blobs.forEach((blob, i) => {
+            const factor = (i + 1) * 10;
+            blob.style.transform = `translate(${targetX * factor}px, ${targetY * factor}px)`;
+          });
+        }
+        if (Math.abs(mouseX - targetX) > 0.001 || Math.abs(mouseY - targetY) > 0.001) {
+          requestAnimationFrame(loop);
+        } else {
+          active = false;
+        }
+      }
+
+      /* Start only when mouse moves to save battery */
+      document.addEventListener('mousemove', () => {
+        if (!active) {
+          active = true;
+          requestAnimationFrame(loop);
+        }
+      }, { once: true, passive: true });
+    })();
+  </script>
 </body>
 </html>
